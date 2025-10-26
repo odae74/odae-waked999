@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TROX — The Eternal Capsule</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black: #000000;
+      --deep-blue: #0D1B2A;
+      --gold: #FFD700;
+      --orange: #FF6F00;
+      --white: #f0f0f0;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      background: radial-gradient(ellipse at center, var(--black) 0%, var(--deep-blue) 100%);
+      font-family: 'Orbitron', sans-serif;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      color: var(--gold);
+    }
+
+    .logo {
+      font-size: 3.5rem;
+      letter-spacing: 8px;
+      text-shadow: 0 0 20px var(--gold), 0 0 40px var(--orange);
+      animation: glow 4s ease-in-out infinite;
+    }
+
+    @keyframes glow {
+      0%, 100% { text-shadow: 0 0 20px var(--gold), 0 0 40px var(--orange); }
+      50% { text-shadow: 0 0 40px var(--gold), 0 0 60px var(--orange); }
+    }
+
+    .enter-btn {
+      margin-top: 40px;
+      padding: 14px 32px;
+      font-size: 1rem;
+      background: transparent;
+      border: 2px solid var(--gold);
+      color: var(--gold);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .enter-btn:hover {
+      background: var(--gold);
+      color: var(--black);
+      box-shadow: 0 0 20px var(--gold);
+    }
+
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+
+    .tagline {
+      margin-top: 20px;
+      font-size: 0.9rem;
+      color: var(--white);
+      opacity: 0.6;
+      letter-spacing: 2px;
+    }
+  </style>
+</head>
+<body>
+  <div class="logo">TROX</div>
+  <div class="tagline">THE CAPSULE SPACE</div>
+  <button class="enter-btn" onclick="enter()">ابدأ</button>
+
+  <canvas id="stars"></canvas>
+
+  <script>
+    function enter() {
+      window.location.href = "space.html";
+    }
+
+    // خلفية نجوم متحركة
+    const canvas = document.getElementById('stars');
+    const ctx = canvas.getContext('2d');
+    let stars = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    function createStars() {
+      stars = [];
+      for (let i = 0; i < 150; i++) {
+        stars.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          radius: Math.random() * 1.5,
+          alpha: Math.random(),
+          dx: (Math.random() - 0.5) * 0.5,
+          dy: (Math.random() - 0.5) * 0.5
+        });
+      }
+    }
+
+    function drawStars() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let star of stars) {
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${star.alpha})`;
+        ctx.fill();
+        star.x += star.dx;
+        star.y += star.dy;
+
+        if (star.x < 0 || star.x > canvas.width) star.dx *= -1;
+        if (star.y < 0 || star.y > canvas.height) star.dy *= -1;
+      }
+      requestAnimationFrame(drawStars);
+    }
+
+    window.addEventListener('resize', () => {
+      resizeCanvas();
+      createStars();
+    });
+
+    resizeCanvas();
+    createStars();
+    drawStars();
+  </script>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Reflection Capsule — LUMINA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Poppins&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: radial-gradient(circle at center, #000000 0%, #0D1B2A 100%);
+      font-family: 'Poppins', sans-serif;
+      color: #C0C0C0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    h1 {
+      font-family: 'Cinzel', serif;
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: #6A5ACD;
+      text-shadow: 0 0 20px #6A5ACD;
+    }
+
+    .content-box {
+      background: #1a1a1a;
+      border: 2px solid #6A5ACD;
+      border-radius: 12px;
+      padding: 30px;
+      width: 90%;
+      max-width: 600px;
+      text-align: center;
+      box-shadow: 0 0 20px #6A5ACD;
+      margin-bottom: 30px;
+    }
+
+    .quote {
+      font-style: italic;
+      margin-bottom: 20px;
+      color: #ccc;
+    }
+
+    .question {
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    textarea {
+      width: 100%;
+      height: 120px;
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      background: #111;
+      color: #C0C0C0;
+      resize: none;
+      font-size: 1rem;
+    }
+
+    button {
+      margin-top: 20px;
+      background: #6A5ACD;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      font-weight: bold;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #483D8B;
+    }
+  </style>
+</head>
+<body>
+  <h1>Reflection Capsule</h1>
+  <div class="content-box" id="capsule">
+    <div class="quote" id="quote"></div>
+    <div class="question" id="question"></div>
+    <textarea placeholder="Write your thoughts here..."></textarea>
+    <button onclick="saveCapsule()">Save Capsule</button>
+  </div>
+
+  <script>
+    const mood = localStorage.getItem('lumina_mood') || 'calm';
+
+    const reflections = {
+      calm: {
+        quote: "Peace is not the absence of noise, but the presence of clarity.",
+        question: "What brings you inner peace lately?"
+      },
+      excited: {
+        quote: "Energy is the spark of creation.",
+        question: "What idea excites you most right now?"
+      },
+      lost: {
+        quote: "Even stars wander before they shine.",
+        question: "What question are you trying to answer?"
+      },
+      sad: {
+        quote: "Sadness is a shadow that teaches us where the light is.",
+        question: "What do you wish someone would say to you?"
+      },
+      focused: {
+        quote: "Clarity is the crown of focus.",
+        question: "What are you building with your attention today?"
+      }
+    };
+
+    document.getElementById('quote').innerText = reflections[mood].quote;
+    document.getElementById('question').innerText = reflections[mood].question;
+
+    function saveCapsule() {
+      const text = document.querySelector('textarea').value.trim();
+      if (text) {
+        const saved = JSON.parse(localStorage.getItem('lumina_echoes') || '[]');
+        saved.push({ mood, text, date: new Date().toISOString() });
+        localStorage.setItem('lumina_echoes', JSON.stringify(saved));
+        alert('Your reflection has been saved.');
+        document.querySelector('textarea').value = '';
+      } else {
+        alert('Please write something before saving.');
+      }
+    }
+  </script>
+</body>
+</html>

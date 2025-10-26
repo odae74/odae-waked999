@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TROX Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Poppins&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      background: linear-gradient(to bottom, #000000, #0D1B2A);
+      font-family: 'Poppins', sans-serif;
+      color: #FFD700;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2rem;
+      margin-bottom: 20px;
+      text-shadow: 0 0 15px #FFD700;
+    }
+
+    .info-box {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid #FFD700;
+      border-radius: 12px;
+      padding: 20px;
+      width: 100%;
+      max-width: 400px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 0 20px #6A5ACD;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .info-box p {
+      margin: 10px 0;
+      font-size: 1rem;
+      color: #ccc;
+    }
+
+    .btn {
+      padding: 12px 24px;
+      background: #FFD700;
+      color: #000;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      margin: 10px;
+    }
+
+    .btn:hover {
+      background: #FF6F00;
+    }
+  </style>
+</head>
+<body>
+  <h1>Your TROX Dashboard</h1>
+  <div class="info-box">
+    <p><strong>User:</strong> <span id="userEmail">—</span></p>
+    <p><strong>Rank:</strong> <span id="userRank">Explorer</span></p>
+    <p><strong>Capsules Launched:</strong> <span id="capsuleCount">0</span></p>
+  </div>
+  <button class="btn" onclick="goToCreate()">Launch New Capsule</button>
+  <button class="btn" onclick="goToTiers()">Upgrade Rank</button>
+
+  <script>
+    const email = localStorage.getItem('trox_user') || 'Guest';
+    const capsules = JSON.parse(localStorage.getItem('trox_capsules') || '[]');
+    const rank = localStorage.getItem('trox_rank') || 'Explorer';
+
+    document.getElementById('userEmail').innerText = email;
+    document.getElementById('capsuleCount').innerText = capsules.length;
+    document.getElementById('userRank').innerText = rank;
+
+    function goToCreate() {
+      window.location.href = "create.html";
+    }
+
+    function goToTiers() {
+      window.location.href = "tiers.html";
+    }
+  </script>
+</body>
+</html>

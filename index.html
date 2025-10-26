@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LUMINA — The Thought Mirror</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Poppins&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black: #000000;
+      --deep-blue: #0D1B2A;
+      --silver: #C0C0C0;
+      --violet: #6A5ACD;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      height: 100vh;
+      background: radial-gradient(circle at center, var(--black) 0%, var(--deep-blue) 100%);
+      font-family: 'Poppins', sans-serif;
+      color: var(--silver);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .title {
+      font-family: 'Cinzel', serif;
+      font-size: 3rem;
+      color: var(--violet);
+      text-shadow: 0 0 20px var(--violet);
+      animation: pulse 4s infinite ease-in-out;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); text-shadow: 0 0 20px var(--violet); }
+      50% { transform: scale(1.05); text-shadow: 0 0 40px var(--violet); }
+    }
+
+    .message {
+      margin-top: 20px;
+      font-size: 1.2rem;
+      text-align: center;
+      max-width: 80%;
+      opacity: 0;
+      animation: fadeIn 3s forwards 2s;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    .enter-btn {
+      margin-top: 40px;
+      padding: 12px 24px;
+      background: var(--violet);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 0 10px var(--violet);
+      transition: background 0.3s ease;
+    }
+
+    .enter-btn:hover {
+      background: #483D8B;
+    }
+
+    .orbs {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .orb {
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: rgba(106, 90, 205, 0.2);
+      animation: float 10s infinite ease-in-out;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+      100% { transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="title">LUMINA</div>
+  <div class="message">Welcome to the Thought Mirror — Your mind deserves reflection.</div>
+  <button class="enter-btn" onclick="enterRoom()">Enter</button>
+  <div class="orbs" id="orbs"></div>
+
+  <script>
+    function enterRoom() {
+      window.location.href = "room.html";
+    }
+
+    // Generate floating orbs
+    const orbContainer = document.getElementById('orbs');
+    for (let i = 0; i < 20; i++) {
+      const orb = document.createElement('div');
+      orb.classList.add('orb');
+      orb.style.top = Math.random() * 100 + '%';
+      orb.style.left = Math.random() * 100 + '%';
+      orb.style.animationDuration = (Math.random() * 5 + 5) + 's';
+      orbContainer.appendChild(orb);
+    }
+  </script>
+</body>
+</html>

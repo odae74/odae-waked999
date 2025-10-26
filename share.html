@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Share Capsule — TROX</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Poppins&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: radial-gradient(circle at center, #000000 0%, #0D1B2A 100%);
+      font-family: 'Poppins', sans-serif;
+      color: #FFD700;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2rem;
+      margin-bottom: 20px;
+      text-shadow: 0 0 15px #FFD700;
+    }
+
+    textarea {
+      width: 100%;
+      max-width: 600px;
+      height: 120px;
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      background: #111;
+      color: #FFD700;
+      resize: none;
+      font-size: 1rem;
+      margin-bottom: 20px;
+    }
+
+    button {
+      background: #FF6F00;
+      color: #000;
+      border: none;
+      padding: 10px 20px;
+      font-weight: bold;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #FFD700;
+    }
+
+    .link-box {
+      margin-top: 20px;
+      background: #1a1a1a;
+      padding: 10px;
+      border-radius: 8px;
+      color: #ccc;
+      font-size: 0.9rem;
+      word-break: break-all;
+      max-width: 600px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Share Your Capsule</h1>
+  <textarea id="capsuleText" placeholder="Write your capsule here..."></textarea>
+  <button onclick="generateLink()">Generate Shareable Link</button>
+  <div class="link-box" id="linkBox" style="display:none;"></div>
+
+  <script>
+    function generateLink() {
+      const text = document.getElementById('capsuleText').value.trim();
+      if (!text) {
+        alert('Please write something first.');
+        return;
+      }
+
+      const encoded = encodeURIComponent(text);
+      const link = `${window.location.origin}/capsule.html?data=${encoded}`;
+      const box = document.getElementById('linkBox');
+      box.innerText = link;
+      box.style.display = 'block';
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mirror Room — LUMINA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Poppins&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: radial-gradient(circle at center, #000000 0%, #0D1B2A 100%);
+      font-family: 'Poppins', sans-serif;
+      color: #C0C0C0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    h1 {
+      font-family: 'Cinzel', serif;
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: #6A5ACD;
+      text-shadow: 0 0 20px #6A5ACD;
+    }
+
+    p {
+      font-size: 1rem;
+      margin-bottom: 30px;
+      text-align: center;
+      max-width: 600px;
+    }
+
+    .mood-options {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .mood {
+      background: #1a1a1a;
+      border: 2px solid #6A5ACD;
+      border-radius: 12px;
+      padding: 20px;
+      width: 160px;
+      text-align: center;
+      box-shadow: 0 0 15px #6A5ACD;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .mood:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 25px #C0C0C0;
+    }
+  </style>
+</head>
+<body>
+  <h1>Mirror Room</h1>
+  <p>How do you feel today? Choose your current state of mind to begin your reflection.</p>
+  <div class="mood-options">
+    <div class="mood" onclick="selectMood('calm')">Calm</div>
+    <div class="mood" onclick="selectMood('excited')">Excited</div>
+    <div class="mood" onclick="selectMood('lost')">Lost</div>
+    <div class="mood" onclick="selectMood('sad')">Sad</div>
+    <div class="mood" onclick="selectMood('focused')">Focused</div>
+  </div>
+
+  <script>
+    function selectMood(mood) {
+      localStorage.setItem('lumina_mood', mood);
+      window.location.href = 'capsule.html';
+    }
+  </script>
+</body>
+</html>
